@@ -10,11 +10,8 @@ const ProgressDashboard = () => {
   const xpProgress = (currentXP / nextLevelXP) * 100;
 
   const badges = [
-    { id: 1, name: "First Steps", icon: Star, earned: true },
-    { id: 2, name: "Problem Solver", icon: Zap, earned: true },
-    { id: 3, name: "Quick Learner", icon: Target, earned: true },
-    { id: 4, name: "Perfectionist", icon: Trophy, earned: true },
-    { id: 5, name: "Team Player", icon: Award, earned: true },
+    
+   
   ];
 
   const recentAchievements = [
@@ -66,31 +63,7 @@ const ProgressDashboard = () => {
               </div>
             </div>
           </Card>
-
-          {/* Badges Card */}
-          <Card className="p-6">
-            <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-accent" />
-              Achievements
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {badges.map((badge) => (
-                <div
-                  key={badge.id}
-                  className={`flex flex-col items-center p-3 rounded-lg border ${
-                    badge.earned
-                      ? "bg-primary/5 border-primary/20"
-                      : "bg-muted/50 border-border opacity-50"
-                  } transition-all hover:scale-105`}
-                >
-                  <badge.icon className={`w-6 h-6 mb-1 ${badge.earned ? "text-primary" : "text-muted-foreground"}`} />
-                  <span className="text-xs text-center">{badge.name}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          {/* Recent Activity */}
+          
           <Card className="p-6 col-span-1 lg:col-span-3">
             <h3 className="font-semibold text-lg mb-4">Recent Achievements</h3>
             <div className="space-y-3">

@@ -19,10 +19,8 @@ interface Track {
   title: string;
   description: string;
   skills: string[];
-  salary: string;
-  demand: string;
-  duration: string;
-  color: string;
+  color: string;  
+
 }
 
 const tracks: Track[] = [
@@ -32,9 +30,6 @@ const tracks: Track[] = [
     title: "Data Analyst",
     description: "Transform raw data into actionable insights using SQL, Python, and visualization tools.",
     skills: ["SQL", "Python", "Excel", "Tableau", "Power BI"],
-    salary: "$65k - $95k",
-    demand: "Very High",
-    duration: "4-6 months",
     color: "primary",
   },
   {
@@ -43,32 +38,16 @@ const tracks: Track[] = [
     title: "Data Scientist",
     description: "Build predictive models and machine learning solutions to solve complex business problems.",
     skills: ["Python", "R", "Machine Learning", "Statistics", "Deep Learning"],
-    salary: "$95k - $140k",
-    demand: "Extremely High",
-    duration: "6-9 months",
     color: "accent",
   },
-  {
-    id: "big-data-engineer",
-    icon: Database,
-    title: "Big Data Engineer",
-    description: "Design and build scalable data pipelines for processing massive datasets.",
-    skills: ["Hadoop", "Spark", "Kafka", "Scala", "Python"],
-    salary: "$100k - $150k",
-    demand: "High",
-    duration: "6-8 months",
-    color: "success",
-  },
+  
   {
     id: "cloud-engineer",
     icon: Cloud,
     title: "Cloud Engineer",
     description: "Deploy and manage cloud infrastructure for data solutions on AWS, Azure, or GCP.",
     skills: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"],
-    salary: "$90k - $135k",
-    demand: "Very High",
-    duration: "5-7 months",
-    color: "primary",
+    color: "violet",
   },
   {
     id: "ml-engineer",
@@ -76,10 +55,7 @@ const tracks: Track[] = [
     title: "ML Engineer",
     description: "Productionize machine learning models and build AI-powered applications at scale.",
     skills: ["Python", "TensorFlow", "PyTorch", "MLOps", "APIs"],
-    salary: "$110k - $160k",
-    demand: "Extremely High",
-    duration: "7-10 months",
-    color: "accent",
+    color: "success",
   },
 ];
 
@@ -104,11 +80,9 @@ const CareerTracks = () => {
     <section className="py-16 bg-background" id="tracks">
       <div className="container px-4 mx-auto">
         <div className="text-center mb-12">
-          <Badge variant="outline" className="mb-4">
-            Choose Your Path
-          </Badge>
+         
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            AI & Data Science Career Tracks
+            Career Tracks
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Select the career path that aligns with your goals. Each track offers structured learning, 
@@ -145,23 +119,6 @@ const CareerTracks = () => {
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3 pt-4 border-t border-border">
-                    <div>
-                      <div className="text-xs text-muted-foreground mb-1">Avg Salary</div>
-                      <div className="font-semibold text-sm">{track.salary}</div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground mb-1">Job Demand</div>
-                      <div className="flex items-center gap-1">
-                        <TrendingUp className="w-3 h-3 text-success" />
-                        <span className="font-semibold text-sm text-success">{track.demand}</span>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground mb-1">Duration</div>
-                      <div className="font-semibold text-sm">{track.duration}</div>
-                    </div>
-                  </div>
                 </div>
 
                 <Button 
@@ -183,7 +140,7 @@ const CareerTracks = () => {
               <h3 className="text-xl font-bold">Not Sure Which Path?</h3>
             </div>
             <p className="text-muted-foreground mb-4">
-              Take our career assessment quiz to discover which AI & Data Science track matches your skills, 
+              Take our career assessment quiz to discover which track matches your skills, 
               interests, and career goals.
             </p>
             <Button variant="outline" size="lg">

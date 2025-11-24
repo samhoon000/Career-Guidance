@@ -10,11 +10,9 @@ const Footer = () => {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Zap className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold">SkillQuest</span>
+              <span className="text-xl font-bold">[app_name]</span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Research-backed learning platform for career transformation.
-            </p>
+            
           </div>
 
           <div>
@@ -49,7 +47,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© 2025 SkillQuest. Built on leading educational research.</p>
+          <p>© 2025 [app_name]. Built on leading educational research.</p>
         </div>
       </div>
     </footer>

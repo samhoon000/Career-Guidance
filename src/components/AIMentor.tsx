@@ -15,9 +15,7 @@ const AIMentor = () => {
   ]);
 
   const quickActions = [
-    { icon: BookOpen, label: "Explain a concept", color: "primary" },
-    { icon: Code, label: "Debug my code", color: "accent" },
-    { icon: Lightbulb, label: "Suggest projects", color: "success" },
+   
   ];
 
   const handleSend = () => {

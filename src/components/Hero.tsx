@@ -83,23 +83,20 @@ const Hero = () => {
 
       <div className="container px-4 mx-auto text-center relative z-10">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6 animate-fade-in">
-          <Sparkles className="w-4 h-4 text-accent" aria-hidden="true" />
-          <span className="text-sm font-medium text-accent">
-            Research-Backed Learning Platform
-          </span>
-        </div>
+       
+        <br />
+        
 
         {/* Heading */}
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent animate-fade-in-up">
-          Master AI & Data Science
+          Hello [user]!
           <br />
           Your Career Starts Here
         </h1>
 
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in-up delay-100">
-          Choose your path: Data Analyst, Data Scientist, Big Data Engineer, Cloud Engineer, or ML Engineer. 
+          Choose your path: Data Analyst, Data Scientist, Cloud Engineer, or ML Engineer. 
           Structured learning with AI mentorship and real-world projects.
         </p>
 
