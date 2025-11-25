@@ -1,10 +1,9 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Zap } from "lucide-react";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,7 +33,14 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20 flex flex-col">
-      <Header />
+      <header className="w-full border-b border-border/60 bg-background/95">
+        <div className="container mx-auto px-4 h-16 flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+            <Zap className="w-5 h-5 text-white" />
+          </div>
+          <span className="text-xl font-semibold text-foreground tracking-tight">[app_name]</span>
+        </div>
+      </header>
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md bg-card rounded-3xl shadow-2xl border border-border/60 p-8 space-y-6">
           <div className="text-center space-y-2">
@@ -83,7 +89,6 @@ const LoginPage = () => {
           </p>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

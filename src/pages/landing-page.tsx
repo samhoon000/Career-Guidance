@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Sparkles, Target, Zap } from "lucide-react";
@@ -26,7 +25,6 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20 flex flex-col">
-      <Header />
       <main className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-5xl mx-auto text-center space-y-12">
           <div className="space-y-6">
