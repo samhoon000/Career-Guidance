@@ -100,28 +100,7 @@ const Hero = () => {
           Structured learning with AI mentorship and real-world projects.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in-up delay-200">
-          <Button
-            size="lg"
-            className="gap-2 bg-gradient-to-r from-primary to-primary/90 hover:shadow-lg transition-all"
-            aria-label="Start Your Learning Journey"
-            onClick={handleGetStarted}
-          >
-            Get Started
-            <ArrowRight className="w-4 h-4" aria-hidden="true" />
-          </Button>
-
-          <Button
-            size="lg"
-            variant="outline"
-            className="gap-2"
-            aria-label="Explore Learning Paths"
-            onClick={handleExplorePaths}
-          >
-            Explore Path
-          </Button>
-        </div>
+        <div className="mb-16" />
 
         {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animate-fade-in-up delay-300">
