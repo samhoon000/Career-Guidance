@@ -7,34 +7,21 @@ import { useBigDataEngineerProgress } from "@/hooks/useBigDataEngineerProgress";
 import { useCloudEngineerProgress } from "@/hooks/useCloudEngineerProgress";
 import { useMLEngineerProgress } from "@/hooks/useMLEngineerProgress";
 
-interface Feature {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-  color: string;
-}
-
-const features: Feature[] = [
+const features = [
   {
     icon: Target,
-    title: "Multiple Career Tracks",
-    description:
-      "Choose from Data Analyst, Data Scientist, Big Data, Cloud, ML Engineer paths.",
-    color: "text-primary bg-primary/10",
+    title: "Prepare for Interview",
+    description: "Practice mock questions and improve interview readiness.",
   },
   {
     icon: Sparkles,
-    title: "AI-Powered Learning",
-    description:
-      "Personalized curriculum with 24/7 AI mentorship for each track.",
-    color: "text-accent bg-accent/10",
+    title: "Connect to Mentor",
+    description: "Get guidance, career advice, and personalized support.",
   },
   {
     icon: Zap,
-    title: "Industry Projects",
-    description:
-      "Build portfolio-ready projects specific to your chosen career path.",
-    color: "text-success bg-success/10",
+    title: "Connect to Peers",
+    description: "Collaborate, share progress, and learn together.",
   },
 ];
 
@@ -104,21 +91,18 @@ const Hero = () => {
 
         {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animate-fade-in-up delay-300">
-          {features.map(({ icon: Icon, title, description, color }, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col items-center p-6 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition-shadow"
+          {features.map(({ icon: Icon, title, description }) => (
+            <button
+              key={title}
+              type="button"
+              className="flex flex-col items-center p-6 rounded-2xl bg-card border border-border shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all text-center"
             >
-              <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${color}`}
-              >
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4 bg-[#0A3A67]/10 text-[#0A3A67]">
                 <Icon className="w-6 h-6" aria-hidden="true" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">{title}</h3>
-              <p className="text-sm text-muted-foreground text-center">
-                {description}
-              </p>
-            </div>
+              <h3 className="text-xl font-semibold mb-2">{title}</h3>
+              <p className="text-sm text-muted-foreground">{description}</p>
+            </button>
           ))}
         </div>
       </div>
