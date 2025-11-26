@@ -13,6 +13,7 @@ import CloudEngineer from "./pages/CloudEngineer";
 import MLEngineer from "./pages/MLEngineer";
 import LoginPage from "./pages/login-page";
 import SignupPage from "./pages/signup-page";
+import InterviewPackages from "./pages/interview-packages";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/big-data-engineer" element={<BigDataEngineer />} />
           <Route path="/cloud-engineer" element={<CloudEngineer />} />
           <Route path="/ml-engineer" element={<MLEngineer />} />
+          <Route path="/interview-packages" element={<InterviewPackages />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

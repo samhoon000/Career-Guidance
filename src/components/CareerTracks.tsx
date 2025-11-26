@@ -1,17 +1,10 @@
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { 
-  BarChart3, 
-  Brain, 
-  Database, 
-  Cloud, 
-  Cpu,
-  TrendingUp,
-  ArrowRight,
-  CheckCircle2
-} from "lucide-react";
+import { BarChart3, Brain, Cloud, Cpu, CheckCircle2 } from "lucide-react";
+import { PastelCard, type PastelAccent } from "@/components/shared/pastel-card";
+import { IconBubble } from "@/components/shared/icon-bubble";
+import { SectionHeading } from "@/components/shared/section-heading";
 
 interface Track {
   id: string;
@@ -19,8 +12,8 @@ interface Track {
   title: string;
   description: string;
   skills: string[];
-  color: string;  
-
+  accent: PastelAccent;
+  iconTone: string;
 }
 
 const tracks: Track[] = [
@@ -30,7 +23,8 @@ const tracks: Track[] = [
     title: "Data Analyst",
     description: "Transform raw data into actionable insights using SQL, Python, and visualization tools.",
     skills: ["SQL", "Python", "Excel", "Tableau", "Power BI"],
-    color: "primary",
+    accent: "blue-indigo",
+    iconTone: "text-sky-600",
   },
   {
     id: "data-scientist",
@@ -38,7 +32,8 @@ const tracks: Track[] = [
     title: "Data Scientist",
     description: "Build predictive models and machine learning solutions to solve complex business problems.",
     skills: ["Python", "R", "Machine Learning", "Statistics", "Deep Learning"],
-    color: "accent",
+    accent: "purple-fuchsia",
+    iconTone: "text-fuchsia-600",
   },
   
   {
@@ -47,7 +42,8 @@ const tracks: Track[] = [
     title: "Cloud Engineer",
     description: "Deploy and manage cloud infrastructure for data solutions on AWS, Azure, or GCP.",
     skills: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"],
-    color: "violet",
+    accent: "sky-cyan",
+    iconTone: "text-cyan-600",
   },
   {
     id: "ml-engineer",
@@ -55,7 +51,8 @@ const tracks: Track[] = [
     title: "ML Engineer",
     description: "Productionize machine learning models and build AI-powered applications at scale.",
     skills: ["Python", "TensorFlow", "PyTorch", "MLOps", "APIs"],
-    color: "success",
+    accent: "emerald-teal",
+    iconTone: "text-emerald-600",
   },
 ];
 
@@ -77,76 +74,55 @@ const CareerTracks = () => {
   };
 
   return (
-    <section className="py-16 bg-background" id="tracks">
-      <div className="container px-4 mx-auto">
-        <div className="text-center mb-12">
-         
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Career Tracks
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Select the career path that aligns with your goals. Each track offers structured learning, 
-            hands-on projects, and industry-recognized skills.
-          </p>
-        </div>
+    <section className="relative py-24" id="tracks">
+      <div className="container mx-auto max-w-7xl px-4">
+        <SectionHeading
+          title="Career Tracks"
+          description="Select the career path that aligns with your goals. Each track offers structured learning, hands-on projects, and industry-recognized skills."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
+        <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
           {tracks.map((track) => {
             const Icon = track.icon;
             return (
-              <Card
-                key={track.id}
-                className="p-6 hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50"
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className={`w-14 h-14 rounded-2xl bg-${track.color}/10 flex items-center justify-center flex-shrink-0`}>
-                    <Icon className={`w-7 h-7 text-${track.color}`} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-2">{track.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {track.description}
-                    </p>
+              <PastelCard key={track.id} accent={track.accent} surfaceClassName="h-full flex flex-col gap-6">
+                <div className="flex items-start gap-4">
+                  <IconBubble icon={Icon} variant={track.accent} size="lg" className={track.iconTone} />
+                  <div className="space-y-3">
+                    <h3 className="text-2xl font-semibold text-slate-900">{track.title}</h3>
+                    <p className="text-sm text-slate-500">{track.description}</p>
                   </div>
                 </div>
 
-                <div className="space-y-4 mb-6">
-                  <div className="flex flex-wrap gap-2">
-                    {track.skills.map((skill, idx) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-
+                <div className="flex flex-wrap gap-2">
+                  {track.skills.map((skill) => (
+                    <Badge key={skill} variant="secondary" className="rounded-full bg-slate-100 text-xs text-slate-600">
+                      {skill}
+                    </Badge>
+                  ))}
                 </div>
 
-                <Button 
-                  className="w-full gap-2 bg-gradient-to-r from-primary to-primary/90"
-                  onClick={() => handleStartPath(track.id)}
-                >
+                <Button variant="gradient" className="w-full" onClick={() => handleStartPath(track.id)}>
                   Start This Path
-                  <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Card>
+              </PastelCard>
             );
           })}
         </div>
 
-        <div className="mt-12 text-center">
-          <Card className="max-w-3xl mx-auto p-6 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <CheckCircle2 className="w-5 h-5 text-success" />
-              <h3 className="text-xl font-bold">Not Sure Which Path?</h3>
+        <div className="mt-12">
+          <PastelCard accent="purple-fuchsia" surfaceClassName="flex flex-col items-center gap-4 text-center">
+            <div className="flex items-center gap-2 text-slate-900">
+              <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+              <h3 className="text-xl font-semibold">Not Sure Which Path?</h3>
             </div>
-            <p className="text-muted-foreground mb-4">
-              Take our career assessment quiz to discover which track matches your skills, 
-              interests, and career goals.
+            <p className="text-sm text-slate-500">
+              Take our career assessment quiz to discover which track matches your skills, interests, and career goals.
             </p>
-            <Button variant="outline" size="lg">
+            <Button variant="glass" size="lg">
               Take Career Assessment
             </Button>
-          </Card>
+          </PastelCard>
         </div>
       </div>
     </section>

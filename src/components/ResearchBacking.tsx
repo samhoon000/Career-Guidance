@@ -1,6 +1,8 @@
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Users, Target, TrendingUp } from "lucide-react";
+import { PastelCard } from "@/components/shared/pastel-card";
+import { IconBubble } from "@/components/shared/icon-bubble";
+import { SectionHeading } from "@/components/shared/section-heading";
 
 const ResearchBacking = () => {
   const researchPoints = [
@@ -35,54 +37,37 @@ const ResearchBacking = () => {
   ];
 
   return (
-    <section className="py-16 bg-background">
-      <div className="container px-4 mx-auto">
-        <div className="text-center mb-12">
-          <Badge variant="outline" className="mb-4">
-            Evidence-Based Approach
-          </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Built on Leading Educational Research
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our AI & Data Science curriculum integrates proven methodologies from peer-reviewed studies on technical education and career development
-          </p>
-        </div>
+    <section className="py-24">
+      <div className="container mx-auto max-w-6xl px-4">
+        <SectionHeading
+          eyebrow="Evidence-Based Approach"
+          title="Built on Leading Educational Research"
+          description="Our AI & Data Science curriculum integrates proven methodologies from peer-reviewed studies on technical education and career development"
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
           {researchPoints.map((point, index) => (
-            <Card
-              key={index}
-              className="p-6 hover:shadow-lg transition-all border-l-4 border-l-primary"
-            >
+            <PastelCard key={index} surfaceClassName="flex flex-col gap-4">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <point.icon className="w-6 h-6 text-primary" />
-                </div>
+                <IconBubble icon={point.icon} variant="blue-indigo" />
                 <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-lg">{point.title}</h3>
-                    <Badge variant="secondary" className="text-success font-semibold">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="text-lg font-semibold text-slate-900">{point.title}</h3>
+                    <Badge variant="secondary" className="rounded-full bg-emerald-50 text-emerald-600">
                       {point.stat}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {point.description}
-                  </p>
-                  <p className="text-xs text-muted-foreground italic">
-                    Source: {point.source}
-                  </p>
+                  <p className="mt-3 text-sm text-slate-500">{point.description}</p>
+                  <p className="mt-2 text-xs italic text-slate-400">Source: {point.source}</p>
                 </div>
               </div>
-            </Card>
+            </PastelCard>
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <Card className="max-w-3xl mx-auto p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
-            <h3 className="text-2xl font-bold mb-4">
-              Proven Learning Theories Applied
-            </h3>
+        <div className="mt-12">
+          <PastelCard accent="sky-cyan" surfaceClassName="flex flex-col gap-4 text-center">
+            <h3 className="text-2xl font-semibold text-slate-900">Proven Learning Theories Applied</h3>
             <div className="flex flex-wrap justify-center gap-3">
               {[
                 "Bloom's Taxonomy",
@@ -90,13 +75,13 @@ const ResearchBacking = () => {
                 "Gamification Theory",
                 "Social Learning Theory",
                 "Competency-Based Education",
-              ].map((theory, idx) => (
-                <Badge key={idx} variant="outline" className="px-4 py-2">
+              ].map((theory) => (
+                <Badge key={theory} variant="outline" className="rounded-full border-slate-200 px-4 py-2 text-slate-600">
                   {theory}
                 </Badge>
               ))}
             </div>
-          </Card>
+          </PastelCard>
         </div>
       </div>
     </section>

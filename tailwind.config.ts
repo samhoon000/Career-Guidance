@@ -63,9 +63,29 @@ export default {
         },
       },
       borderRadius: {
+        xl: "calc(var(--radius) + 0.5rem)",
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 0.25rem)",
+        sm: "calc(var(--radius) - 0.5rem)",
+      },
+      boxShadow: {
+        soft: "0 15px 45px rgba(15, 23, 42, 0.08)",
+        elevated: "0 25px 65px rgba(15, 23, 42, 0.12)",
+        glow: "0 0 45px rgba(14, 165, 233, 0.25)",
+      },
+      backgroundImage: {
+        "gradient-blue-indigo":
+          "linear-gradient(135deg, hsl(205 100% 94%) 0%, hsl(242 100% 94%) 52%, hsl(270 100% 96%) 100%)",
+        "gradient-purple-fuchsia":
+          "linear-gradient(135deg, hsl(251 91% 95%) 0%, hsl(275 100% 95%) 45%, hsl(320 100% 95%) 100%)",
+        "gradient-sky-cyan":
+          "linear-gradient(135deg, hsl(195 100% 94%) 0%, hsl(204 100% 93%) 48%, hsl(195 67% 91%) 100%)",
+        "gradient-emerald-teal":
+          "linear-gradient(135deg, hsl(163 100% 94%) 0%, hsl(158 100% 93%) 45%, hsl(191 100% 93%) 100%)",
+        "gradient-surface":
+          "linear-gradient(180deg, hsla(0 0% 100% / 0.95) 0%, hsla(210 44% 98% / 0.9) 100%)",
+        "gradient-hero":
+          "radial-gradient(circle at top, hsla(217 92% 68% / 0.25), hsla(0 0% 100% / 0)), radial-gradient(circle at 80% 20%, hsla(238 80% 66% / 0.25), hsla(0 0% 100% / 0))",
       },
       keyframes: {
         "accordion-down": {

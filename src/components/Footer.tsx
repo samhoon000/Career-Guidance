@@ -1,53 +1,51 @@
 import { Zap } from "lucide-react";
 
+const footerColumns = [
+  {
+    title: "Platform",
+    links: ["Learning Paths", "AI Mentor", "Challenges", "Projects"],
+  },
+  {
+    title: "Resources",
+    links: ["Research", "Documentation", "Community", "Blog"],
+  },
+  {
+    title: "Company",
+    links: ["About", "Careers", "Privacy", "Terms"],
+  },
+];
+
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="container px-4 mx-auto py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div className="col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
+    <footer className="border-t border-white/60 bg-white/80 backdrop-blur-lg">
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid gap-10 md:grid-cols-[2fr,1fr,1fr,1fr]">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400 to-indigo-500 shadow-soft">
+                <Zap className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold">[app_name]</span>
+              <span className="text-xl font-semibold text-slate-900">[app_name]</span>
             </div>
-            
+            <p className="text-sm text-slate-500">
+              © 2025 [app_name]. Built on leading educational research.
+            </p>
           </div>
 
-          <div>
-            <h3 className="font-semibold mb-3">Platform</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Learning Paths</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">AI Mentor</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Challenges</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Projects</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">Resources</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Research</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Community</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">Company</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Privacy</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Terms</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© 2025 [app_name]. Built on leading educational research.</p>
+          {footerColumns.map((column) => (
+            <div key={column.title} className="space-y-3">
+              <h3 className="text-base font-semibold text-slate-900">{column.title}</h3>
+              <ul className="space-y-2 text-sm text-slate-500">
+                {column.links.map((link) => (
+                  <li key={link}>
+                    <a href="#" className="transition-colors hover:text-slate-900">
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </footer>
