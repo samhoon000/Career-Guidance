@@ -23,6 +23,10 @@ const Header = () => {
           <a href="#mentor" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
             AI Mentor
           </a>
+            <a href="#mentor" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
+            About us
+          </a>
+          
         </nav>
       </div>
     </header>

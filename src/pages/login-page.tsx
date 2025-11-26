@@ -11,24 +11,44 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (!emailPattern.test(formValues.email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    if (formValues.password.length < 8 || !/[A-Z]/.test(formValues.password) || !/[a-z]/.test(formValues.password) || !/\d/.test(formValues.password)) {
-      setError("Password must include 8+ characters with uppercase, lowercase, and a number.");
-      return;
-    }
-
     setError(null);
-    const derivedName = formValues.email.split("@")[0] || "Explorer";
-    localStorage.setItem("career-guidance-user-name", derivedName);
-    navigate("/index.html", { replace: true });
+    setLoading(true);
+
+    try {
+      // ----- CALL BACKEND LOGIN API -----
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          emailOrUsername: formValues.email,
+          password: formValues.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      // ❌ Incorrect login → stop redirect
+      if (!res.ok) {
+        setError(data.message || "Login failed");
+        setLoading(false);
+        return;
+      }
+
+      // ----- Save token + username -----
+      localStorage.setItem("cg-token", data.token);
+      localStorage.setItem("career-guidance-user-name", data.username);
+
+      // ----- Redirect on success -----
+      navigate("/index.html", { replace: true });
+    } catch (err) {
+      setError("Server error. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,6 +61,7 @@ const LoginPage = () => {
           <span className="text-xl font-semibold text-foreground tracking-tight">[app_name]</span>
         </div>
       </header>
+
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md bg-card rounded-3xl shadow-2xl border border-border/60 p-8 space-y-6">
           <div className="text-center space-y-2">
@@ -50,13 +71,15 @@ const LoginPage = () => {
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="space-y-2">
-              <Label htmlFor="login-email">Email</Label>
+              <Label htmlFor="login-email">Email / Username</Label>
               <Input
                 id="login-email"
-                type="email"
-                placeholder="you@example.com"
+                type="text"
+                placeholder="you@example.com or username"
                 value={formValues.email}
-                onChange={(event) => setFormValues((prev) => ({ ...prev, email: event.target.value }))}
+                onChange={(event) =>
+                  setFormValues((prev) => ({ ...prev, email: event.target.value }))
+                }
               />
             </div>
 
@@ -67,7 +90,9 @@ const LoginPage = () => {
                 type="password"
                 placeholder="••••••••"
                 value={formValues.password}
-                onChange={(event) => setFormValues((prev) => ({ ...prev, password: event.target.value }))}
+                onChange={(event) =>
+                  setFormValues((prev) => ({ ...prev, password: event.target.value }))
+                }
               />
             </div>
 
@@ -75,15 +100,20 @@ const LoginPage = () => {
 
             <Button
               type="submit"
+              disabled={loading}
               className="w-full h-12 text-base font-semibold bg-gradient-to-r from-[#0A3A67] via-primary to-orange-400 text-white rounded-full shadow-lg hover:-translate-y-0.5 hover:shadow-2xl transition-all"
             >
-              Sign In
+              {loading ? "Signing In..." : "Sign In"}
             </Button>
           </form>
 
           <p className="text-center text-sm text-muted-foreground">
             New here?{" "}
-            <button type="button" onClick={() => navigate("/signup")} className="font-semibold text-primary hover:text-primary/80 transition-colors">
+            <button
+              type="button"
+              onClick={() => navigate("/signup")}
+              className="font-semibold text-primary hover:text-primary/80 transition-colors"
+            >
               Create an account
             </button>
           </p>
@@ -94,4 +124,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
