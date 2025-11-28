@@ -1,0 +1,186 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>P2P Chat — Mobile friendly</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <style>
+    :root{ --accent:#0b6cff; --muted:#8aa; --bg:#f4f7fb; --card:#fff; --left:#f7fbfe; }
+    html,body { height:100%; margin:0; }
+    body { font-family: system-ui, Arial; background:var(--bg); display:flex; align-items:center; justify-content:center; }
+
+    /* Registration card */
+    #initCard { background:var(--card); border-radius:14px; padding:28px; box-shadow:0 30px 80px rgba(10,20,40,0.10); width:760px; max-width:94%; box-sizing:border-box; }
+    h1 { margin:0 0 12px 0; font-size:30px; color:#071033; }
+    .muted { color:var(--muted); }
+    input, select { padding:12px; border-radius:10px; border:1px solid #eee; width:100%; box-sizing:border-box; font-size:15px; background:#fff; }
+    button { padding:10px 14px; border-radius:10px; border:0; cursor:pointer; font-weight:600; }
+    .primary { background:var(--accent); color:white; box-shadow: 0 10px 30px rgba(11,108,255,0.12); }
+
+    /* Chat overlay (desktop & mobile) */
+    #chatOverlay { position:fixed; inset:18px; display:none; align-items:center; justify-content:center; background:rgba(10,15,20,0.45); z-index:10000; }
+    .chat-shell { width:calc(100% - 80px); height:calc(100% - 80px); max-width:1200px; max-height:900px; background:var(--card); border-radius:12px; box-shadow: 0 30px 80px rgba(10,20,40,0.28); display:flex; overflow:hidden; }
+
+    /* Left chat list */
+    .left-col { width:320px; background:var(--left); border-right:1px solid #eef6fb; display:flex; flex-direction:column; }
+    .left-header { padding:18px; font-weight:700; font-size:18px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eef6fb; }
+    .left-search { padding:10px 14px; border-radius:10px; border:1px solid #e9f2f8; margin:12px; background:white; }
+    .chat-list { flex:1; overflow:auto; padding:8px; }
+    .chat-item { display:flex; gap:10px; padding:12px; border-radius:10px; align-items:center; cursor:pointer; margin:8px; transition: background .12s; }
+    .chat-item:hover { background: #eaf6ff; }
+    .chat-item.active { background: #dff0ff; }
+    .avatar { width:44px; height:44px; border-radius:10px; background:#dfeffd; display:flex; align-items:center; justify-content:center; font-weight:700; color:#044; }
+    .chat-meta { flex:1; display:flex; flex-direction:column; }
+    .chat-name { font-weight:700; color:#032a4d; margin-bottom:4px; }
+    .chat-snippet { color:#6f9aa8; font-size:13px; }
+
+    /* Right conversation */
+    .right-col { flex:1; display:flex; flex-direction:column; }
+    .conv-header { padding:14px 18px; border-bottom:1px solid #f1f4f8; display:flex; justify-content:space-between; align-items:center; }
+    .conv-body { padding:18px; flex:1; overflow:auto; background:linear-gradient(180deg,#fff,#f9fbff); }
+    .conv-footer { padding:12px 18px; border-top:1px solid #f1f4f8; display:flex; gap:8px; align-items:center; background:linear-gradient(180deg,#fff,#f7fbff); position:relative; }
+    .conv-input { flex:1; padding:12px 14px; border-radius:12px; border:1px solid #eee; font-size:15px; }
+
+    .chat-msg { margin-bottom:12px; max-width:78%; padding:10px 12px; border-radius:10px; font-size:14px; }
+    .msg-me { margin-left:auto; background:var(--accent); color:#fff; border-bottom-right-radius:2px; }
+    .msg-them { margin-right:auto; background:#f1f6fb; color:#032a4d; border-bottom-left-radius:2px; }
+
+    .small-muted { color:var(--muted); font-size:13px; }
+    .close-btn { background:#efefef; color:#111; padding:8px 12px; border-radius:8px; border:0; cursor:pointer; }
+
+    /* Selection modal */
+    #similarModalOverlay { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(10,15,20,0.45); z-index:10001; }
+    .similar-modal-box { width:820px; max-width:calc(100% - 48px); background:var(--card); border-radius:14px; padding:22px; box-shadow:0 30px 60px rgba(10,20,40,0.25); }
+
+    /* Peer list scrollbar */
+    #similarModalList {
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+    }
+    #similarModalList::-webkit-scrollbar { width: 6px; }
+    #similarModalList::-webkit-scrollbar-thumb {
+      background: #c8d4e0;
+      border-radius: 4px;
+    }
+
+    .peer { background:#f6fbff; border-radius:10px; padding:14px; margin-bottom:12px; box-shadow:0 6px 18px rgba(11,108,255,0.06); display:flex; justify-content:space-between; align-items:flex-start; }
+    .peer-name { font-weight:700; font-size:18px; color:#032a4d; margin-bottom:6px; }
+    .peer-sub { color:#7ea6b8; font-size:13px; margin-bottom:8px; }
+    .chat-btn { background: var(--accent); color: #fff; padding:10px 14px; border-radius:10px; border:0; cursor:pointer; box-shadow: 0 10px 30px rgba(11,108,255,0.12); }
+
+    /* ---- TYPOGRAPHY / TYPING STYLE ---- */
+    /* The typing indicator in the conv header uses a lighter gray */
+    #convStatus.typing {
+      color: #aeb6bb; /* lighter gray for 'typing...' */
+      font-style: italic;
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 900px) {
+      .chat-shell { width:calc(100% - 24px); height:calc(100% - 24px); max-width:100%; max-height:100%; border-radius:10px; }
+      .left-col { width:100%; height:220px; border-right:0; border-bottom:1px solid #eef6fb; order:0; }
+      .right-col { order:1; flex:1; }
+      .left-header { padding:12px; }
+      .left-search { margin:10px; }
+      .conv-header { padding:12px; }
+      .conv-footer { padding:12px; position:sticky; bottom:0; background:linear-gradient(180deg,#fff,#f7fbff); z-index:5; }
+      .conv-input { padding:14px; font-size:16px; }
+      .chat-msg { max-width:90%; }
+      .left-col .list-toggle { display:block; margin:12px; padding:10px 12px; border-radius:10px; background:#fff; border:1px solid #eef6fb; cursor:pointer; text-align:center; }
+    }
+
+    @media (max-width: 560px) {
+      .chat-shell { flex-direction:column; border-radius:0; height:100vh; width:100vw; margin:0; }
+      .left-col { height:auto; min-height:120px; padding-bottom:12px; }
+      .conv-body { padding:12px; }
+      .conv-input { font-size:17px; border-radius:14px; padding:14px; }
+      .conv-send { padding:12px 16px; }
+      .left-col .list-toggle { display:block; }
+    }
+
+    .left-col.collapsed .chat-list { display:none; }
+    .left-col.collapsed .left-search { display:none; }
+    .left-col.collapsed .left-header .left-title { display:block; }
+
+    .android .chat-shell { height:100vh; padding-bottom:env(safe-area-inset-bottom); }
+    .android .conv-input { font-size:17px; padding:14px; }
+    .android .conv-send { padding:12px 18px; border-radius:12px; }
+
+    .conv-footer button, .chat-item, .chat-btn { touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0.04); }
+  </style>
+</head>
+<body>
+  <div id="initCard">
+    <h1>Welcome to P2P Chat</h1>
+    <div class="small-muted" style="margin-bottom:12px;">Enter your name and choose a domain to join</div>
+
+    <div style="display:flex; gap:12px; align-items:center;">
+      <input id="nameInit" placeholder="Your name (e.g. alice)" style="flex:1;" />
+      <select id="domainInit" aria-label="domain select" style="width:210px;">
+        <option value="">Select domain — Cloud Computing or Data Analytics</option>
+        <option value="cloud_computing">Cloud Computing</option>
+        <option value="data_analytics">Data Analytics</option>
+      </select>
+      <button id="registerInit" class="primary">Enter</button>
+    </div>
+
+    <div id="regNotice" style="margin-top:12px; display:none; color:var(--accent); font-weight:700;">You have been registered</div>
+  </div>
+
+  <!-- Selection modal -->
+  <div id="similarModalOverlay">
+    <div class="similar-modal-box">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+        <div style="font-weight:700; font-size:20px;">People in the same domain</div>
+        <button id="closeModal" class="close-btn">Close</button>
+      </div>
+      <div style="color:var(--muted); margin-bottom:12px;">This list updates in real-time. Click Chat to select someone.</div>
+      <div id="similarModalList"></div>
+    </div>
+  </div>
+
+  <!-- Fullscreen chat shell -->
+  <div id="chatOverlay">
+    <div class="chat-shell" role="dialog" aria-modal="true">
+      <div class="left-col">
+        <div class="left-header">
+          <div class="left-title">Chats</div>
+          <button id="closeShell" class="close-btn">Close</button>
+        </div>
+
+        <div class="list-toggle" style="display:none;">Show / Hide chats</div>
+
+        <input id="listSearch" class="left-search" placeholder="Search chats..." />
+
+        <div style="padding:0 12px 8px 12px;">
+          <button id="connectBtn" class="primary" style="width:100%;">Connect</button>
+        </div>
+
+        <div id="chatList" class="chat-list"></div>
+      </div>
+
+      <div class="right-col">
+        <div class="conv-header">
+          <div id="convTitle" style="font-weight:700;">Select a chat</div>
+          <div class="small-muted" id="convStatus">not connected</div>
+        </div>
+
+        <div class="conv-body" id="convBody">
+          <div style="padding:24px;color:var(--muted)">Pick someone from the left (or click Connect) to start chatting.</div>
+        </div>
+
+        <div class="conv-footer">
+          <input id="convInput" class="conv-input" placeholder="Type a message..." autocomplete="on" inputmode="text" />
+          <button id="convSend" class="primary conv-send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/simple-peer@9/simplepeer.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>

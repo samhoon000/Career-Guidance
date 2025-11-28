@@ -1,5 +1,9 @@
+// /Career-Guidance/src/components/hero.tsx
+
 import { Sparkles, Target, Zap } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+
 import { useDataAnalystProgress } from "@/hooks/useDataAnalystProgress";
 import { useDataScientistProgress } from "@/hooks/useDataScientistProgress";
 import { useBigDataEngineerProgress } from "@/hooks/useBigDataEngineerProgress";
@@ -29,13 +33,23 @@ const features = [
   },
 ];
 
+const CHAT_URL = "https://chantel-phenetic-unequivalently.ngrok-free.dev";
+
 const Hero = () => {
   const navigate = useNavigate();
+
   const dataAnalystProgress = useDataAnalystProgress();
   const dataScientistProgress = useDataScientistProgress();
   const bigDataProgress = useBigDataEngineerProgress();
   const cloudProgress = useCloudEngineerProgress();
   const mlProgress = useMLEngineerProgress();
+
+  // 🔥 LOGOUT HANDLER
+  const handleLogout = () => {
+    localStorage.removeItem("cg-token");
+    localStorage.removeItem("career-guidance-user-name");
+    navigate("/login", { replace: true });
+  };
 
   const handleGetStarted = () => {
     const tracksSection = document.getElementById("tracks");
@@ -45,7 +59,6 @@ const Hero = () => {
   };
 
   const handleExplorePaths = () => {
-    // Check which track has the most progress
     const progressData = [
       { route: "/data-analyst", progress: dataAnalystProgress.progress.overallProgress },
       { route: "/data-scientist", progress: dataScientistProgress.progress.overallProgress },
@@ -54,12 +67,10 @@ const Hero = () => {
       { route: "/ml-engineer", progress: mlProgress.progress.overallProgress },
     ];
 
-    // Find track with highest progress
-    const maxProgress = progressData.reduce((max, current) => 
+    const maxProgress = progressData.reduce((max, current) =>
       current.progress > max.progress ? current : max
     );
 
-    // If any progress exists, navigate to that track, otherwise scroll to tracks
     if (maxProgress.progress > 0) {
       navigate(maxProgress.route);
     } else {
@@ -69,8 +80,18 @@ const Hero = () => {
 
   return (
     <section className="relative isolate overflow-hidden bg-white">
+
+      {/* 🔥 LOGOUT BUTTON — TOP RIGHT */}
+      <button
+        onClick={handleLogout}
+        className="absolute top-6 right-6 z-50 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full shadow-md transition"
+      >
+        Logout
+      </button>
+
       <div className="absolute inset-0 bg-gradient-hero opacity-70" />
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]" />
+
       <div className="container relative z-10 mx-auto flex min-h-[90vh] flex-col items-center justify-center px-6 py-24 text-center">
         <div className="mx-auto max-w-5xl space-y-8">
           <h1 className="text-5xl font-semibold leading-tight text-slate-900 md:text-7xl">
@@ -80,6 +101,7 @@ const Hero = () => {
             <br />
             Your Career Starts Here
           </h1>
+
           <p className="mx-auto max-w-3xl text-lg text-slate-500 md:text-2xl">
             Choose your path: Data Analyst, Data Scientist, Cloud Engineer, or ML Engineer.
             Structured learning with AI mentorship and real-world projects.
@@ -96,12 +118,33 @@ const Hero = () => {
               </div>
             );
 
+            // Connect to Peers — opens new tab
+            if (title === "Connect to Peers") {
+              return (
+                <button
+                  key={title}
+                  onClick={() => {
+                    const newWin = window.open(CHAT_URL, "_blank", "noopener,noreferrer");
+                    try {
+                      newWin?.focus();
+                    } catch {}
+                  }}
+                  className="block h-full w-full rounded-[32px]"
+                >
+                  <PastelCard accent={accent} surfaceClassName="h-full flex items-center justify-center">
+                    {content}
+                  </PastelCard>
+                </button>
+              );
+            }
+
+            // Interview route
             if (title === "Prepare for Interview") {
               return (
                 <Link
                   key={title}
                   to="/interview-packages"
-                  className="block h-full w-full rounded-[32px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200 focus-visible:ring-offset-4"
+                  className="block h-full w-full rounded-[32px]"
                 >
                   <PastelCard accent={accent} surfaceClassName="h-full flex items-center justify-center">
                     {content}

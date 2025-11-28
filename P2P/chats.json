@@ -1,0 +1,194 @@
+{
+  "30d7fdc8-b1fe-41f2-9cce-f96b6c65970e": {
+    "conversations": {
+      "29edd5d5-3edf-4c6d-ae6a-03939cca896f": [
+        {
+          "from": "You",
+          "text": "Hi",
+          "ts": 1764232982016,
+          "relayed": false
+        },
+        {
+          "from": "Alice",
+          "text": "Hi",
+          "ts": 1764232929228,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "hi",
+          "ts": 1764232939256,
+          "relayed": false
+        },
+        {
+          "from": "shizam",
+          "text": "hi",
+          "ts": 1764232992443,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "how are you",
+          "ts": 1764232951996,
+          "relayed": false
+        },
+        {
+          "from": "shizam",
+          "text": "how are you",
+          "ts": 1764233004907,
+          "relayed": true
+        },
+        {
+          "from": "shizam",
+          "text": "hello",
+          "ts": 1764233005011,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "hello (relayed)",
+          "ts": 1764233004948,
+          "relayed": false
+        },
+        {
+          "from": "shizam",
+          "text": "hello",
+          "ts": 1764233058638,
+          "relayed": true
+        },
+        {
+          "from": "Alice",
+          "text": "Hi",
+          "ts": 1764233008222,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "Hi (relayed)",
+          "ts": 1764233060943,
+          "relayed": false
+        },
+        {
+          "from": "Alice",
+          "text": "Hi",
+          "ts": 1764233008270,
+          "relayed": true
+        }
+      ]
+    }
+  },
+  "29edd5d5-3edf-4c6d-ae6a-03939cca896f": {
+    "conversations": {
+      "30d7fdc8-b1fe-41f2-9cce-f96b6c65970e": [
+        {
+          "from": "You",
+          "text": "Hi",
+          "ts": 1764232982016,
+          "relayed": false
+        },
+        {
+          "from": "Alice",
+          "text": "Hi",
+          "ts": 1764232929228,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "hi",
+          "ts": 1764232939256,
+          "relayed": false
+        },
+        {
+          "from": "shizam",
+          "text": "hi",
+          "ts": 1764232992443,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "how are you",
+          "ts": 1764232951996,
+          "relayed": false
+        },
+        {
+          "from": "shizam",
+          "text": "how are you",
+          "ts": 1764233004907,
+          "relayed": true
+        },
+        {
+          "from": "shizam",
+          "text": "hello",
+          "ts": 1764233005011,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "hello (relayed)",
+          "ts": 1764233004948,
+          "relayed": false
+        },
+        {
+          "from": "shizam",
+          "text": "hello",
+          "ts": 1764233058638,
+          "relayed": true
+        },
+        {
+          "from": "Alice",
+          "text": "Hi",
+          "ts": 1764233008222,
+          "relayed": true
+        },
+        {
+          "from": "You",
+          "text": "Hi (relayed)",
+          "ts": 1764233060943,
+          "relayed": false
+        },
+        {
+          "from": "Alice",
+          "text": "Hi",
+          "ts": 1764233008270,
+          "relayed": true
+        }
+      ]
+    }
+  },
+  "84152c58-ab21-47c9-b20e-518a44a96c11": {
+    "conversations": {
+      "d37afdc0-f504-48ff-83eb-d3244805ed5c": [
+        {
+          "from": "You",
+          "text": "Hi",
+          "ts": 1764319608334,
+          "relayed": false
+        },
+        {
+          "from": "Hh",
+          "text": "Hi",
+          "ts": 1764319555621,
+          "relayed": true
+        }
+      ]
+    }
+  },
+  "d37afdc0-f504-48ff-83eb-d3244805ed5c": {
+    "conversations": {
+      "84152c58-ab21-47c9-b20e-518a44a96c11": [
+        {
+          "from": "You",
+          "text": "Hi",
+          "ts": 1764319608334,
+          "relayed": false
+        },
+        {
+          "from": "Hh",
+          "text": "Hi",
+          "ts": 1764319555621,
+          "relayed": true
+        }
+      ]
+    }
+  }
+}
