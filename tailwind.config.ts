@@ -43,6 +43,7 @@ export default {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
+        text: "#0f1724",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -67,6 +68,7 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 0.25rem)",
         sm: "calc(var(--radius) - 0.5rem)",
+        card: "16px",
       },
       boxShadow: {
         soft: "0 15px 45px rgba(15, 23, 42, 0.08)",
@@ -86,6 +88,8 @@ export default {
           "linear-gradient(180deg, hsla(0 0% 100% / 0.95) 0%, hsla(210 44% 98% / 0.9) 100%)",
         "gradient-hero":
           "radial-gradient(circle at top, hsla(217 92% 68% / 0.25), hsla(0 0% 100% / 0)), radial-gradient(circle at 80% 20%, hsla(238 80% 66% / 0.25), hsla(0 0% 100% / 0))",
+        "gradient-pastel":
+          "linear-gradient(135deg, #BDE0FE 0%, #E9D5FF 100%)",
       },
       keyframes: {
         "accordion-down": {

@@ -1,5 +1,5 @@
 import { BarChart, BrainCircuit, Cloud, Cpu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PastelCard } from "@/components/shared/pastel-card";
 import { IconBubble } from "@/components/shared/icon-bubble";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -10,7 +10,7 @@ const PACKAGES = [
     description: "Understand interview rounds and required skills.",
     icon: BarChart,
     accent: "blue-indigo",
-    path: "/interview-packages/data-analyst",
+    path: "/interview/data-analyst",
   },
   {
     title: "Data Scientist",
@@ -36,6 +36,8 @@ const PACKAGES = [
 ];
 
 export default function InterviewPackages() {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen py-24">
       <div className="absolute inset-0 bg-gradient-hero opacity-60" aria-hidden="true" />
@@ -48,15 +50,30 @@ export default function InterviewPackages() {
         />
 
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
-          {PACKAGES.map(({ title, description, icon: Icon, accent, path }) => (
-            <Link key={title} to={path} className="focus:outline-none">
+          {PACKAGES.map(({ title, description, icon: Icon, accent, path }) => {
+            const isDataAnalyst = title === "Data Analyst";
+            const CardContent = (
               <PastelCard accent={accent} surfaceClassName="h-full space-y-4">
                 <IconBubble icon={Icon} variant={accent} />
                 <h3 className="text-xl font-semibold text-slate-900">{title}</h3>
                 <p className="text-sm text-slate-500">{description}</p>
               </PastelCard>
-            </Link>
-          ))}
+            );
+
+            return isDataAnalyst ? (
+              <div
+                key={title}
+                onClick={() => navigate(path)}
+                className="focus:outline-none cursor-pointer"
+              >
+                {CardContent}
+              </div>
+            ) : (
+              <Link key={title} to={path} className="focus:outline-none">
+                {CardContent}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

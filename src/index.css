@@ -129,3 +129,12 @@ All colors MUST be HSL.
     background-attachment: fixed;
   }
 }
+
+@layer components {
+  .btn-explore {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-xl text-[#0f1724] bg-gradient-to-r from-blue-200 to-indigo-300 shadow-md transition-all duration-200 ease-out transform hover:from-blue-300 hover:to-indigo-400 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] active:shadow-sm;
+  }
+  .cta-button {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-xl text-[#0f1724] bg-gradient-to-r from-blue-200 to-indigo-300 shadow-md transition-all duration-200 ease-out transform hover:from-blue-300 hover:to-indigo-400 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] active:shadow-sm;
+  }
+}
