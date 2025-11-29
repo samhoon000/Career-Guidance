@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { MCQGroup } from '../components/MCQGroup';
 import { CompletionButton } from '../components/CompletionButton';
 
-export const Round_Technical = () => {
+export default function Round_Technical() {
   const mcqs = [
     {
       question: 'Which statement best describes an INNER JOIN?',
@@ -58,7 +58,7 @@ export const Round_Technical = () => {
     <div className="min-h-screen bg-gradient-pastel py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <Link
-          to="/interview/data-analyst"
+          to="/interview"
           className="inline-flex items-center gap-2 text-lg px-5 py-3 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors mb-8 font-medium"
         >
           ← Back to Home

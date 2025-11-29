@@ -10,7 +10,7 @@ const PACKAGES = [
     description: "Understand interview rounds and required skills.",
     icon: BarChart,
     accent: "blue-indigo",
-    path: "/interview/data-analyst",
+    path: "/interview",
   },
   {
     title: "Data Scientist",

@@ -44,10 +44,20 @@ const rounds: RoundConfig[] = [
   },
 ];
 
-export const InterviewHome = () => {
+export default function InterviewHome() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-pastel py-6 px-4">
       <div className="max-w-5xl mx-auto flex flex-col flex-grow gap-6">
+        <div className="max-w-5xl mx-auto w-full mt-4 flex">
+          <Link
+            to="/interview-packages"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl 
+                       bg-white/80 backdrop-blur shadow-sm border border-slate-200 
+                       hover:shadow-md hover:bg-white transition-all duration-200 text-slate-700"
+          >
+            ← Back
+          </Link>
+        </div>
         <header className="text-center space-y-2">
           <h1 className="text-4xl font-bold text-text">Data Analyst Interview Preparation</h1>
           <p className="text-base text-text/70">Choose a round to learn, practice, and improve.</p>

@@ -25,6 +25,15 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20 flex flex-col">
+      <header className="w-full flex justify-end p-6">
+        <Button
+          variant="outline"
+          className="rounded-full px-6 py-2 text-sm font-semibold border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          onClick={() => navigate("/mentor")}
+        >
+          Join as a Mentor
+        </Button>
+      </header>
       <main className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-5xl mx-auto text-center space-y-12">
           <div className="space-y-6">

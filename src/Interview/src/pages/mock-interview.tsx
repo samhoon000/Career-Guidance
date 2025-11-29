@@ -97,8 +97,9 @@ Interview Transcript:
 ${formattedTranscript}
 `.trim();
 
-export const MockInterview = () => {
+export default function MockInterview() {
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+  console.log("LOADED GROQ KEY:", import.meta.env.VITE_GROQ_API_KEY);
   const [questions, setQuestions] = useState<string[]>([]);
   const [answers, setAnswers] = useState<string[]>(Array(10).fill(''));
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -310,7 +311,7 @@ export const MockInterview = () => {
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="flex items-center justify-between">
           <Link
-            to="/interview/data-analyst"
+            to="/interview"
             className="text-sm font-medium text-accent hover:text-accent-dark transition-colors"
           >
             ← Back to rounds
@@ -458,7 +459,7 @@ export const MockInterview = () => {
                   Restart simulation
                 </button>
                 <Link
-                  to="/interview/data-analyst"
+                  to="/interview"
                   className="w-full sm:w-auto px-6 py-3 rounded-xl bg-accent text-white text-center font-semibold shadow-sm hover:shadow-md transition"
                 >
                   Return home

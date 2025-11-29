@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { MCQGroup } from '../components/MCQGroup';
 import { CompletionButton } from '../components/CompletionButton';
 
-export const Round_Case = () => {
+export default function Round_Case() {
   const mcqs = [
     {
       question:
@@ -111,7 +111,7 @@ export const Round_Case = () => {
     <div className="min-h-screen bg-gradient-pastel py-12 px-4 sm:px-6 lg:px-8 text-lg leading-relaxed">
       <div className="max-w-4xl mx-auto">
         <Link
-          to="/interview/data-analyst"
+          to="/interview"
           className="inline-flex items-center gap-2 text-lg px-5 py-3 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors mb-6 font-medium"
         >
           ← Back to Home

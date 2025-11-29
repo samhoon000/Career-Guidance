@@ -16,7 +16,7 @@ export const CompletionButton = ({ roundId }: { roundId: string }) => {
     // Redirect ONLY when marking as completed
     if (newStatus === true) {
       setTimeout(() => {
-        navigate("/interview/data-analyst");   // Redirect to Interview Home
+        navigate("/interview");   // Redirect to Interview Home
       }, 400);
     }
   };

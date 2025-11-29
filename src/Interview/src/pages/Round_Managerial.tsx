@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { MCQGroup } from '../components/MCQGroup';
 import { CompletionButton } from '../components/CompletionButton';
 
-export const Round_Managerial = () => {
+export default function Round_Managerial() {
   const mcqs = [
     {
       question: 'You have five tasks due this week. Two are high‑impact but not yet urgent, one is a blocker for another team, and two are low‑impact quick wins. What should you do first?',
@@ -100,7 +100,7 @@ export const Round_Managerial = () => {
     <div className="min-h-screen bg-gradient-pastel py-12 px-4 sm:px-6 lg:px-8 text-lg leading-relaxed">
       <div className="max-w-4xl mx-auto">
         <Link
-          to="/interview/data-analyst"
+          to="/interview"
           className="inline-flex items-center gap-2 text-lg px-5 py-3 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors mb-6 font-medium"
         >
           ← Back to Home
