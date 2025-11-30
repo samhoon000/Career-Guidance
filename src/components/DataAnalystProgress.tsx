@@ -21,7 +21,7 @@ export const DataAnalystProgress = ({
   const estimatedWeeksLeft = Math.ceil(((totalVideos - videosWatched) / totalVideos) * 12);
 
   return (
-    <div className="bg-gradient-to-br from-primary/5 to-accent/5 border-b sticky top-0 z-10 backdrop-blur-sm">
+    <div id="progress-section" className="bg-gradient-to-br from-primary/5 to-accent/5 border-b z-10 backdrop-blur-sm">
       <div className="container px-4 py-6 mx-auto">
         <div className="space-y-4">
           <div className="flex items-center justify-between">

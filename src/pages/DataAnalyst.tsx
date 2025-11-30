@@ -6,11 +6,14 @@ import { DataAnalystProgress } from "@/components/DataAnalystProgress";
 import { DataAnalystRoadmap } from "@/components/DataAnalystRoadmap";
 import { useDataAnalystProgress } from "@/hooks/useDataAnalystProgress";
 import { videos, quizzes } from "@/data/dataAnalystContent";
+import { useEffect } from "react"; 
 
 const DataAnalyst = () => {
   const navigate = useNavigate();
   const { progress, calculateOverallProgress } = useDataAnalystProgress();
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const totalVideos = videos.length;
   const totalQuizzes = quizzes.length;
   const videosWatched = progress.videosWatched.length;
@@ -26,7 +29,7 @@ const DataAnalyst = () => {
       <div className="container px-4 py-6 mx-auto">
         <Button
           variant="ghost"
-          onClick={() => navigate("/")}
+          onClick={() => (window.location.href = "/index.html")}
           className="mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />

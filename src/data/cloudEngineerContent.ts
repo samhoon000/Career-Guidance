@@ -422,3 +422,45 @@ export const cloudEngineerModules: Module[] = [
     },
   },
 ];
+
+export const projects = [
+  {
+    level: "Beginner",
+    items: [
+      {
+        title: "Deploy a Static Website on AWS S3 + CloudFront",
+        youtube: "https://youtu.be/-l83oqcaTHg?si=6imfSf3HO5F5ijSU"
+      },
+      {
+        title: "EC2 Web Server Deployment (Apache / Nginx)",
+        youtube: "https://youtu.be/9t9Mp0BGnyI?si=KBfXdcGu97yjHGH5"
+      }
+    ]
+  },
+  {
+    level: "Intermediate",
+    items: [
+      {
+        title: "Deploy a Docker App on AWS ECS",
+        youtube: "https://youtu.be/AiiFbsAlLaI?si=lqGUrw3tcAfweRk_"
+      },
+      {
+        title: "Build a CI/CD Pipeline using AWS CodePipeline",
+        youtube: "https://youtu.be/40X6abe5wv0?si=kWGP74WkuN-Q_0D-"
+      }
+    ]
+  },
+  {
+    level: "Advanced",
+    items: [
+      {
+        title: "Serverless Application using AWS Lambda + API Gateway + DynamoDB",
+        youtube: "https://youtu.be/pK52mfm69i0?si=1OXw4j8LwZ_sUKTG"
+      },
+      {
+        title: "Kubernetes Deployment on AWS EKS (Full Microservices App)",
+        youtube: "https://youtu.be/RRCrY12VY_s?si=uMg-EublmRugGI10"
+      }
+    ]
+  }
+];

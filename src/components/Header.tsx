@@ -17,15 +17,23 @@ const Header = () => {
           <a href="#tracks" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
             Career Tracks
           </a>
-          <a href="#progress" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
+          <a href="#progress-section" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
             My Progress
           </a>
           <a href="#mentor" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
             AI Mentor
           </a>
-            <a href="#mentor" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
-            About us
-          </a>
+          <button
+            onClick={() => {
+              const section = document.getElementById("about-us-section");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="rounded-full px-3 py-1 transition-colors hover:text-slate-900"
+          >
+            About Us
+          </button>
           
         </nav>
       </div>

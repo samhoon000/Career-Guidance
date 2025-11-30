@@ -37,7 +37,7 @@ const ResearchBacking = () => {
   ];
 
   return (
-    <section className="py-24">
+    <section id="about-us-section" className="py-24">
       <div className="container mx-auto max-w-6xl px-4">
         <SectionHeading
           eyebrow="Evidence-Based Approach"

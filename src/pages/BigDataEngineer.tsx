@@ -21,7 +21,7 @@ const BigDataEngineer = () => {
       <div className="container px-4 py-8 mx-auto">
         <Button
           variant="ghost"
-          onClick={() => navigate("/")}
+          onClick={() => (window.location.href = "/index.html")}
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />

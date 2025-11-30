@@ -4,8 +4,12 @@ import { DataScientistRoadmap } from "@/components/DataScientistRoadmap";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const DataScientist = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const navigate = useNavigate();
 
   return (
@@ -16,7 +20,7 @@ const DataScientist = () => {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => navigate("/")}
+          onClick={() => (window.location.href = "/index.html")}
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />

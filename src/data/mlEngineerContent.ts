@@ -432,3 +432,45 @@ export const mlEngineerModules: Module[] = [
     },
   },
 ];
+
+export const projects = [
+  {
+    level: "Beginner",
+    items: [
+      {
+        title: "Iris Classification (Complete ML Pipeline)",
+        youtube: "https://youtu.be/pTjsr_0YWas?si=THdJrlNb31uhfA4q"
+      },
+      {
+        title: "House Price Prediction (ML Regression Pipeline)",
+        youtube: "https://youtu.be/Wqmtf9SA_kk?si=EL2oULwnfraXChIW"
+      }
+    ]
+  },
+  {
+    level: "Intermediate",
+    items: [
+      {
+        title: "Credit Card Fraud Detection",
+        youtube: "https://youtu.be/frM_7UMD_-A?si=Cue79UWbqjSLb9zW"
+      },
+      {
+        title: "Demand Forecasting for Retail",
+        youtube: "https://youtu.be/grtQYI4KVpo?si=bIOjJWHKuJy80PSL"
+      }
+    ]
+  },
+  {
+    level: "Advanced",
+    items: [
+      {
+        title: "NLP Ticket Classification using BERT (End-to-End Transformers Project)",
+        youtube: "https://youtu.be/p7V4Aa7qEpw?si=Sw70j6He9d2vibmv"
+      },
+      {
+        title: "End-to-End ML Project with MLOps",
+        youtube: "https://youtu.be/o6vbe5G7xNo?si=MydICd3-_IiuIYGK"
+      }
+    ]
+  }
+];

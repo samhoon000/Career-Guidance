@@ -5,8 +5,12 @@ import { CloudEngineerProgress } from "@/components/CloudEngineerProgress";
 import { CloudEngineerRoadmap } from "@/components/CloudEngineerRoadmap";
 import { useCloudEngineerProgress } from "@/hooks/useCloudEngineerProgress";
 import Header from "@/components/Header";
+import { useEffect } from "react";
 
 const CloudEngineer = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const navigate = useNavigate();
   const {
     progress,
@@ -21,7 +25,7 @@ const CloudEngineer = () => {
       <div className="container px-4 py-8 mx-auto">
         <Button
           variant="ghost"
-          onClick={() => navigate("/")}
+          onClick={() => (window.location.href = "/index.html")}
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />

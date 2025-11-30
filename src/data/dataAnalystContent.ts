@@ -27,7 +27,6 @@ export interface Module {
   id: string;
   title: string;
   description: string;
-  duration: string;
   order: number;
 }
 
@@ -36,42 +35,36 @@ export const modules: Module[] = [
     id: "excel-fundamentals",
     title: "Excel Fundamentals",
     description: "Master Excel basics including formulas, functions, and data visualization",
-    duration: "Week 1",
     order: 1,
   },
   {
     id: "sql-essentials",
     title: "SQL Essentials",
     description: "Learn to query and manipulate databases with SQL",
-    duration: "Week 2-3",
     order: 2,
   },
   {
     id: "python-data-analysis",
     title: "Python for Data Analysis",
     description: "Use Python and Pandas for data manipulation and analysis",
-    duration: "Week 4-5",
     order: 3,
   },
   {
     id: "data-visualization",
     title: "Data Visualization",
     description: "Create compelling visualizations with Matplotlib, Seaborn, and Tableau",
-    duration: "Week 6-7",
     order: 4,
   },
   {
     id: "statistics-fundamentals",
     title: "Statistics Fundamentals",
     description: "Understanding statistical concepts for data analysis",
-    duration: "Week 8-9",
     order: 5,
   },
   {
     id: "bi-tools",
     title: "Business Intelligence Tools",
     description: "Master Tableau and Power BI for interactive dashboards",
-    duration: "Week 10-12",
     order: 6,
   },
 ];
@@ -81,15 +74,15 @@ export const videos: Video[] = [
   {
     id: "excel-1",
     title: "Introduction to Excel for Data Analysis",
-    youtubeId: "Vl0H-qTclOg",
-    duration: "18:45",
+    youtubeId: "O1QfG5SXRkM",
+    duration: "12:09",
     description: "Learn Excel basics and essential features for data analysis",
     moduleId: "excel-fundamentals",
   },
   {
     id: "excel-2",
     title: "Excel Formulas and Functions",
-    youtubeId: "VU47KYFldkM",
+    youtubeId: "Jl0Qk63z2ZY",
     duration: "22:30",
     description: "Master essential Excel formulas like VLOOKUP, IF, SUMIF",
     moduleId: "excel-fundamentals",
@@ -98,14 +91,14 @@ export const videos: Video[] = [
     id: "excel-3",
     title: "Pivot Tables and Charts",
     youtubeId: "UsdedFoTA68",
-    duration: "25:15",
+    duration: "13:22",
     description: "Create dynamic pivot tables and professional charts",
     moduleId: "excel-fundamentals",
   },
   {
     id: "excel-4",
     title: "Advanced Excel Functions",
-    youtubeId: "Ew2DQJz-RYs",
+    youtubeId: "ZyFVqnkPBMA",
     duration: "28:30",
     description: "Master INDEX-MATCH, array formulas, and conditional formatting",
     moduleId: "excel-fundamentals",
@@ -766,3 +759,46 @@ export const quizzes: Quiz[] = [
     ],
   },
 ];
+
+export const projects = [
+  {
+    level: "Beginner",
+    items: [
+      {
+        title: "Excel Sales Dashboard",
+        youtube: "https://youtu.be/m13o5aqeCbM?si=W2dNdlqkeoxSv6tT"
+      },
+      {
+        title: "SQL - Data Exploration Project",
+        youtube: "https://youtu.be/qfyynHBFOsM?si=TiuQs5PjvdHuUlIB"
+      }
+    ]
+  },
+  {
+    level: "Intermediate",
+    items: [
+      {
+        title: "Power BI Sales Insights Project",
+        youtube: "https://youtu.be/BLxW9ZSuuVI?si=i0zuVFZYvMJ_7AU2"
+      },
+      {
+        title: "Exploratory Data Analysis (EDA) in Python",
+        youtube: "https://youtu.be/xi0vhXFPegw?si=ADoPxd3-SBNqVfE5"
+      }
+    ]
+  },
+  {
+    level: "Advanced",
+    items: [
+      {
+        title: "Machine Learning Churn Prediction",
+        youtube: "https://youtu.be/MSBY28IJ47U?si=4uQ0h9-7QHOXV2Py"
+      },
+      {
+        title: "Time Series Forecasting Project",
+        youtube: "https://youtu.be/fxx_E0ojKrc?si=tZWlr5On3SkZyYVg"
+      }
+    ]
+  }
+];
+

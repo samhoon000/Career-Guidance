@@ -660,3 +660,45 @@ export const getTotalVideos = () => {
 export const getTotalQuizzes = () => {
   return dataScientistModules.length;
 };
+
+export const projects = [
+  {
+    level: "Beginner",
+    items: [
+      {
+        title: "Titanic Survival Prediction",
+        youtube: "https://youtu.be/I3FBJdiExcg?si=_ilIRewyUFdYbXTk"
+      },
+      {
+        title: "House Price Prediction",
+        youtube: "https://youtu.be/Wqmtf9SA_kk?si=EL2oULwnfraXChIW"
+      }
+    ]
+  },
+  {
+    level: "Intermediate",
+    items: [
+      {
+        title: "Customer Segmentation using K-Means Clustering",
+        youtube: "https://youtu.be/4jv1pUrG0Zk?si=Q99alwOCUs3aIHay"
+      },
+      {
+        title: "Credit Card Fraud Detection (ML + Imbalanced Data)",
+        youtube: "https://youtu.be/frM_7UMD_-A?si=Cue79UWbqjSLb9zW"
+      }
+    ]
+  },
+  {
+    level: "Advanced",
+    items: [
+      {
+        title: "Time Series Forecasting – Stock Price Prediction (LSTM)",
+        youtube: "https://youtu.be/H6du_pfuznE?si=6DdEr1ElvwdpbNcz"
+      },
+      {
+        title: "End-to-End NLP Project – Text Classification with BERT",
+        youtube: "https://youtu.be/p7V4Aa7qEpw?si=Sw70j6He9d2vibmv"
+      }
+    ]
+  }
+];
