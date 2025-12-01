@@ -154,6 +154,21 @@ const Hero = () => {
               );
             }
 
+            // Connect to Mentor route
+            if (title === "Connect to Mentor") {
+              return (
+                <button
+                  key={title}
+                  onClick={() => navigate("/find-mentor")}
+                  className="block h-full w-full rounded-[32px]"
+                >
+                  <PastelCard accent={accent} surfaceClassName="h-full flex items-center justify-center">
+                    {content}
+                  </PastelCard>
+                </button>
+              );
+            }
+
             // Default: Mentor card
             return (
               <PastelCard

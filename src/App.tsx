@@ -23,6 +23,7 @@ import RoundViz from "./Interview/src/pages/Round_Viz";
 import RoundBehavioral from "./Interview/src/pages/Round_Behavioral";
 import RoundManagerial from "./Interview/src/pages/Round_Managerial";
 import MockInterview from "./Interview/src/pages/mock-interview";
+import FindMentor from "./pages/FindMentor";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
           <Route path="/interview/viz" element={<RoundViz />} />
           <Route path="/interview/behavioral" element={<RoundBehavioral />} />
           <Route path="/interview/managerial" element={<RoundManagerial />} />
+          <Route path="/find-mentor" element={<FindMentor />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
