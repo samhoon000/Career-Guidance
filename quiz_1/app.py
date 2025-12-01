@@ -46,5 +46,9 @@ def handle_internal_error(error):
     return jsonify({"error": "Internal server error", "details": str(error)}), 500
 
 
+import os
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5002, debug=True)
+    port = int(os.environ.get("PORT", 5002))  # fallback for local
+    app.run(host="0.0.0.0", port=port)
+
