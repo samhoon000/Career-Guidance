@@ -5,6 +5,7 @@ import { BigDataEngineerProgress } from "@/components/BigDataEngineerProgress";
 import { BigDataEngineerRoadmap } from "@/components/BigDataEngineerRoadmap";
 import { useBigDataEngineerProgress } from "@/hooks/useBigDataEngineerProgress";
 import Header from "@/components/Header";
+import NotesAssistantWidget from "@/components/NotesAssistantWidget";
 
 const BigDataEngineer = () => {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const BigDataEngineer = () => {
           onQuizComplete={markQuizComplete}
         />
       </div>
+      <NotesAssistantWidget />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import NotesAssistantWidget from "@/components/NotesAssistantWidget";
 
 const DataScientist = () => {
   useEffect(() => {
@@ -44,6 +45,7 @@ const DataScientist = () => {
         <DataScientistProgress />
         <DataScientistRoadmap />
       </main>
+      <NotesAssistantWidget />
     </div>
   );
 };

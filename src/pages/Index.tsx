@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import CareerTracks from "@/components/CareerTracks";
 import ResearchBacking from "@/components/ResearchBacking";
 import Footer from "@/components/Footer";
+import NotesAssistantWidget from "@/components/NotesAssistantWidget";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
         <ResearchBacking />
       </main>
       <Footer />
+      <NotesAssistantWidget />
     </div>
   );
 };
