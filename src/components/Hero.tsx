@@ -17,21 +17,22 @@ const features = [
     icon: Target,
     title: "Prepare for Interview",
     description: "Practice mock questions and improve interview readiness.",
-    accent: "blue-indigo",
+    accent: "indigo",
   },
   {
     icon: Sparkles,
     title: "Connect to Mentor",
     description: "Get guidance, career advice, and personalized support.",
-    accent: "purple-fuchsia",
+    accent: "purple",
   },
   {
     icon: Zap,
     title: "Connect to Peers",
     description: "Collaborate, share progress, and learn together.",
-    accent: "emerald-teal",
+    accent: "emerald",
   },
 ];
+
 
 const CHAT_URL = "https://chantel-phenetic-unequivalently.ngrok-free.dev";
 
@@ -96,7 +97,7 @@ const Hero = () => {
         <div className="mx-auto max-w-5xl space-y-8">
           <h1 className="text-5xl font-semibold leading-tight text-slate-900 md:text-7xl">
             <span className="bg-gradient-to-r from-sky-500 via-indigo-500 to-fuchsia-500 bg-clip-text text-transparent">
-              Hello [user]!
+              Hello {localStorage.getItem("career-guidance-user-name") || "User"}!
             </span>
             <br />
             Your Career Starts Here
@@ -138,7 +139,7 @@ const Hero = () => {
               );
             }
 
-            // Interview route
+            // Interview page
             if (title === "Prepare for Interview") {
               return (
                 <Link
@@ -153,8 +154,13 @@ const Hero = () => {
               );
             }
 
+            // Default: Mentor card
             return (
-              <PastelCard key={title} accent={accent} surfaceClassName="h-full flex items-center justify-center">
+              <PastelCard
+                key={title}
+                accent={accent}
+                surfaceClassName="h-full flex items-center justify-center"
+              >
                 {content}
               </PastelCard>
             );

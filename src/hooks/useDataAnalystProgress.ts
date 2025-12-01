@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 
+const API_BASE = "http://localhost:5000/api/progress"; // change if needed
+const TRACK_ID = "data_analyst";
+
 export interface UserProgress {
   videosWatched: string[];
   quizzesCompleted: {
@@ -14,9 +17,7 @@ export interface UserProgress {
   overallProgress: number;
 }
 
-const STORAGE_KEY = "data-analyst-progress";
-
-const initialProgress: UserProgress = {
+const defaultProgress: UserProgress = {
   videosWatched: [],
   quizzesCompleted: {},
   currentModule: "excel-fundamentals",
@@ -24,54 +25,107 @@ const initialProgress: UserProgress = {
 };
 
 export const useDataAnalystProgress = () => {
-  const [progress, setProgress] = useState<UserProgress>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : initialProgress;
-  });
+  const [progress, setProgress] = useState<UserProgress>(defaultProgress);
+  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  }, [progress]);
+  const token = localStorage.getItem("cg-token");
 
-  // Auto-calculate overall progress
+  // ----------------------------
+  // 🔥 1) Load progress from backend
+  // ----------------------------
   useEffect(() => {
-    const totalVideos = 24; // Approximate total videos across all modules
-    const totalQuizzes = 6;
-    const videosProgress = (progress.videosWatched.length / totalVideos) * 70;
-    const passedQuizzes = Object.values(progress.quizzesCompleted).filter((q) => q.passed).length;
-    const quizzesProgress = (passedQuizzes / totalQuizzes) * 30;
-    const calculated = Math.round(videosProgress + quizzesProgress);
-    
-    if (calculated !== progress.overallProgress) {
-      setProgress((prev) => ({ ...prev, overallProgress: calculated }));
+    const fetchProgress = async () => {
+      if (!token) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/${TRACK_ID}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+
+        if (data.success && data.progress) {
+          setProgress({
+            videosWatched: data.progress.modules.flatMap((m: any) => m.videosWatched || []),
+            quizzesCompleted: data.progress.quizzesCompleted || {},
+            currentModule: data.progress.currentModule || "excel-fundamentals",
+            overallProgress: data.progress.overallProgress || 0,
+          });
+        }
+      } catch (err) {
+        console.error("Error loading progress:", err);
+      }
+
+      setLoaded(true);
+    };
+
+    fetchProgress();
+  }, [token]);
+
+  // ----------------------------
+  // 🔥 Helper to send updates to backend
+  // ----------------------------
+  const saveToBackend = async (updates: any) => {
+    if (!token) return;
+
+    try {
+      await fetch(API_BASE, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          trackId: TRACK_ID,
+          updates,
+        }),
+      });
+    } catch (err) {
+      console.error("Failed to sync progress:", err);
     }
-  }, [progress.videosWatched.length, Object.keys(progress.quizzesCompleted).length]);
+  };
 
+  // ----------------------------
+  // 🔥 VIDEO COMPLETE
+  // ----------------------------
   const markVideoComplete = (videoId: string) => {
     setProgress((prev) => {
       if (prev.videosWatched.includes(videoId)) return prev;
-      return {
+
+      const updated = {
         ...prev,
         videosWatched: [...prev.videosWatched, videoId],
       };
+
+      saveToBackend(updated);
+      return updated;
     });
   };
 
   const markVideoIncomplete = (videoId: string) => {
-    setProgress((prev) => ({
-      ...prev,
-      videosWatched: prev.videosWatched.filter((id) => id !== videoId),
-    }));
+    setProgress((prev) => {
+      const updated = {
+        ...prev,
+        videosWatched: prev.videosWatched.filter((id) => id !== videoId),
+      };
+
+      saveToBackend(updated);
+      return updated;
+    });
   };
 
-  const isVideoWatched = (videoId: string): boolean => {
+  const isVideoWatched = (videoId: string) => {
     return progress.videosWatched.includes(videoId);
   };
 
+  // ----------------------------
+  // 🔥 QUIZ COMPLETE
+  // ----------------------------
   const saveQuizResult = (quizId: string, score: number, passed: boolean) => {
     setProgress((prev) => {
-      const existingAttempts = prev.quizzesCompleted[quizId]?.attempts || 0;
-      return {
+      const updated = {
         ...prev,
         quizzesCompleted: {
           ...prev.quizzesCompleted,
@@ -79,49 +133,80 @@ export const useDataAnalystProgress = () => {
             score,
             passed,
             completedAt: new Date().toISOString(),
-            attempts: existingAttempts + 1,
+            attempts: (prev.quizzesCompleted[quizId]?.attempts || 0) + 1,
           },
         },
       };
+
+      saveToBackend(updated);
+      return updated;
     });
   };
 
-  const getQuizResult = (quizId: string) => {
-    return progress.quizzesCompleted[quizId];
-  };
+  const getQuizResult = (quizId: string) => progress.quizzesCompleted[quizId];
 
-  const getModuleProgress = (moduleId: string, totalVideos: number, hasQuiz: boolean) => {
-    const moduleVideos = progress.videosWatched.filter((id) => id.startsWith(moduleId.split("-")[0]));
-    const videosProgress = (moduleVideos.length / totalVideos) * (hasQuiz ? 80 : 100);
-    
-    const quizKey = `quiz-${moduleId.split("-")[0]}`;
-    const quizResult = progress.quizzesCompleted[quizKey];
-    const quizProgress = quizResult?.passed ? 20 : 0;
-    
+  // ----------------------------
+  // 🔥 MODULE PROGRESS
+  // ----------------------------
+  const getModuleProgress = (
+    moduleId: string,
+    totalVideos: number,
+    hasQuiz: boolean
+  ) => {
+    const modulePrefix = moduleId.split("-")[0];
+
+    const watchedVideos = progress.videosWatched.filter((id) =>
+      id.startsWith(modulePrefix)
+    );
+
+    const videosProgress =
+      (watchedVideos.length / totalVideos) * (hasQuiz ? 80 : 100);
+
+    const quizKey = `quiz-${modulePrefix}`;
+    const quizProgress = progress.quizzesCompleted[quizKey]?.passed ? 20 : 0;
+
     return Math.round(videosProgress + quizProgress);
   };
 
   const isModuleComplete = (moduleId: string, totalVideos: number) => {
-    const quizKey = `quiz-${moduleId.split("-")[0]}`;
-    const moduleVideos = progress.videosWatched.filter((id) => id.startsWith(moduleId.split("-")[0]));
+    const modulePrefix = moduleId.split("-")[0];
+
+    const watchedVideos = progress.videosWatched.filter((id) =>
+      id.startsWith(modulePrefix)
+    );
+
+    const quizKey = `quiz-${modulePrefix}`;
     const quizResult = progress.quizzesCompleted[quizKey];
-    
-    return moduleVideos.length === totalVideos && quizResult?.passed;
+
+    return watchedVideos.length === totalVideos && quizResult?.passed;
   };
 
+  // ----------------------------
+  // 🔥 Overall Progress Calculation
+  // ----------------------------
   const calculateOverallProgress = (totalVideos: number, totalQuizzes: number) => {
-    const videosProgress = (progress.videosWatched.length / totalVideos) * 70;
-    const passedQuizzes = Object.values(progress.quizzesCompleted).filter((q) => q.passed).length;
-    const quizzesProgress = (passedQuizzes / totalQuizzes) * 30;
-    
-    return Math.round(videosProgress + quizzesProgress);
+    const videoPart =
+      (progress.videosWatched.length / totalVideos) * 70;
+
+    const quizPassed = Object.values(progress.quizzesCompleted).filter(
+      (q) => q.passed
+    ).length;
+
+    const quizPart = (quizPassed / totalQuizzes) * 30;
+
+    return Math.round(videoPart + quizPart);
   };
 
+  // ----------------------------
+  // 🔥 Reset
+  // ----------------------------
   const resetProgress = () => {
-    setProgress(initialProgress);
+    setProgress(defaultProgress);
+    saveToBackend(defaultProgress);
   };
 
   return {
+    loaded,
     progress,
     markVideoComplete,
     markVideoIncomplete,
