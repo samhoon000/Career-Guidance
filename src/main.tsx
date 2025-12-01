@@ -1,9 +1,8 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { ensureValidApiBaseUrl } from "./lib/api";
+import { QUIZ_API_FALLBACK } from "@/api/endpoints";
 
-const resolvedApiBaseUrl = ensureValidApiBaseUrl();
-console.info(`[questify] Quiz API base URL: ${resolvedApiBaseUrl}`);
+console.info(`[questify] Quiz API base URL: ${QUIZ_API_FALLBACK}`);
 
 createRoot(document.getElementById("root")!).render(<App />);

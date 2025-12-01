@@ -1,2 +1,3 @@
-export const API = import.meta.env.VITE_BACKEND_URL;
+import { LOGIN_API_FALLBACK } from "@/api/endpoints";
 
+export const API = LOGIN_API_FALLBACK;
