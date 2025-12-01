@@ -20,6 +20,8 @@ connectDB();
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/progress", progressRoutes);
+app.use('/api/mentor', require('./routes/mentorRoutes'));
+
 
 // Future socket.io integration placeholder
 // const { initChat } = require("./socket/chatSocket");
