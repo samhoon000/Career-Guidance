@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
+import { API } from "@/api/authApi";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -20,7 +21,7 @@ const LoginPage = () => {
 
     try {
       // ----- CALL BACKEND LOGIN API -----
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
