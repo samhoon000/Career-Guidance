@@ -1,4 +1,5 @@
 import { Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -17,12 +18,9 @@ const Header = () => {
           <a href="#tracks" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
             Career Tracks
           </a>
-          <a href="#progress-section" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
+          <Link to="/data-analyst" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
             My Progress
-          </a>
-          <a href="#mentor" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
-            AI Mentor
-          </a>
+          </Link>
           <button
             onClick={() => {
               const section = document.getElementById("about-us-section");
