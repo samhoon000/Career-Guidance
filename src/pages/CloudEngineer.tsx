@@ -6,6 +6,7 @@ import { CloudEngineerRoadmap } from "@/components/CloudEngineerRoadmap";
 import { useCloudEngineerProgress } from "@/hooks/useCloudEngineerProgress";
 import Header from "@/components/Header";
 import { useEffect } from "react";
+import NotesAssistantWidget from "@/components/NotesAssistantWidget";
 
 const CloudEngineer = () => {
   useEffect(() => {
@@ -47,6 +48,7 @@ const CloudEngineer = () => {
           onQuizComplete={markQuizComplete}
         />
       </div>
+      <NotesAssistantWidget />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { MLEngineerRoadmap } from "@/components/MLEngineerRoadmap";
 import { useMLEngineerProgress } from "@/hooks/useMLEngineerProgress";
 import Header from "@/components/Header";
 import { useEffect } from "react";
+import NotesAssistantWidget from "@/components/NotesAssistantWidget";
 
 const MLEngineer = () => {
   useEffect(() => {
@@ -47,6 +48,7 @@ const MLEngineer = () => {
           onQuizComplete={markQuizComplete}
         />
       </div>
+      <NotesAssistantWidget />
     </div>
   );
 };
