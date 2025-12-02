@@ -2,7 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { BarChart3, Brain, Cloud, Cpu, CheckCircle2 } from "lucide-react";
-import { PastelCard, type PastelAccent } from "@/components/shared/pastel-card";
+import { PastelCard } from "@/components/shared/pastel-card";
+import type { PastelAccent } from "@/components/shared/pastel-card";
 import { IconBubble } from "@/components/shared/icon-bubble";
 import { SectionHeading } from "@/components/shared/section-heading";
 
@@ -35,7 +36,6 @@ const tracks: Track[] = [
     accent: "purple-fuchsia",
     iconTone: "text-fuchsia-600",
   },
-  
   {
     id: "cloud-engineer",
     icon: Cloud,
@@ -119,7 +119,7 @@ const CareerTracks = () => {
             <p className="text-sm text-slate-500">
               Take our career assessment quiz to discover which track matches your skills, interests, and career goals.
             </p>
-            <Button variant="glass" size="lg">
+            <Button variant="glass" size="lg" id="take-assessment-button">
               Take Career Assessment
             </Button>
           </PastelCard>

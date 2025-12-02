@@ -24,45 +24,72 @@ import RoundBehavioral from "./Interview/src/pages/Round_Behavioral";
 import RoundManagerial from "./Interview/src/pages/Round_Managerial";
 import MockInterview from "./Interview/src/pages/mock-interview";
 import FindMentor from "./pages/FindMentor";
+import ChatBot from "./components/ChatBot/ChatBot";
+import { useState, useEffect } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/mentor" element={<Navigate to="/mentor/login" replace />} />
-          <Route path="/mentor/*" element={<MentorApp />} />
-          <Route path="/index.html" element={<Index />} />
-          <Route path="/home" element={<Index />} />
-          <Route path="/data-analyst" element={<DataAnalyst />} />
-          <Route path="/data-scientist" element={<DataScientist />} />
-          <Route path="/big-data-engineer" element={<BigDataEngineer />} />
-          <Route path="/cloud-engineer" element={<CloudEngineer />} />
-          <Route path="/ml-engineer" element={<MLEngineer />} />
-          <Route path="/interview-packages" element={<InterviewPackages />} />
-          <Route path="/interview/data-analyst" element={<Navigate to="/interview" replace />} />
-          <Route path="/interview" element={<InterviewHome />} />
-          <Route path="/mock-interview" element={<MockInterview />} />
-          <Route path="/interview/hr" element={<RoundHR />} />
-          <Route path="/interview/technical" element={<RoundTechnical />} />
-          <Route path="/interview/case" element={<RoundCase />} />
-          <Route path="/interview/viz" element={<RoundViz />} />
-          <Route path="/interview/behavioral" element={<RoundBehavioral />} />
-          <Route path="/interview/managerial" element={<RoundManagerial />} />
-          <Route path="/find-mentor" element={<FindMentor />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  useEffect(() => {
+    const handleTrigger = (e: MouseEvent) => {
+      // Check if the clicked element or its parent is the button
+      const target = e.target as HTMLElement;
+      const button = target.closest("#take-assessment-button");
+
+      if (button) {
+        // Check if we are on the login page
+        if (window.location.pathname === "/login") return;
+
+        setIsChatOpen(true);
+      }
+    };
+
+    document.addEventListener("click", handleTrigger);
+    return () => {
+      document.removeEventListener("click", handleTrigger);
+    };
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <ChatBot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/mentor" element={<Navigate to="/mentor/login" replace />} />
+            <Route path="/mentor/*" element={<MentorApp />} />
+            <Route path="/index.html" element={<Index />} />
+            <Route path="/home" element={<Index />} />
+            <Route path="/data-analyst" element={<DataAnalyst />} />
+            <Route path="/data-scientist" element={<DataScientist />} />
+            <Route path="/big-data-engineer" element={<BigDataEngineer />} />
+            <Route path="/cloud-engineer" element={<CloudEngineer />} />
+            <Route path="/ml-engineer" element={<MLEngineer />} />
+            <Route path="/interview-packages" element={<InterviewPackages />} />
+            <Route path="/interview/data-analyst" element={<Navigate to="/interview" replace />} />
+            <Route path="/interview" element={<InterviewHome />} />
+            <Route path="/mock-interview" element={<MockInterview />} />
+            <Route path="/interview/hr" element={<RoundHR />} />
+            <Route path="/interview/technical" element={<RoundTechnical />} />
+            <Route path="/interview/case" element={<RoundCase />} />
+            <Route path="/interview/viz" element={<RoundViz />} />
+            <Route path="/interview/behavioral" element={<RoundBehavioral />} />
+            <Route path="/interview/managerial" element={<RoundManagerial />} />
+            <Route path="/find-mentor" element={<FindMentor />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
