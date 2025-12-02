@@ -63,6 +63,17 @@ const LoginPage = () => {
         </div>
       </header>
 
+      {/* Back button */}
+      <div className="mt-6 ml-10">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm hover:shadow-md transition"
+        >
+          <span>←</span>
+          <span>Back</span>
+        </button>
+      </div>
+
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md bg-card rounded-3xl shadow-2xl border border-border/60 p-8 space-y-6">
           <div className="text-center space-y-2">
