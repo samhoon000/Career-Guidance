@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from "axios"   // <-- IMPORTANT FIX
+import axios from "axios"
+import { LOGIN_API_FALLBACK } from "@/api/endpoints"
 
 export default function MentorLogin() {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ export default function MentorLogin() {
     setError("")
 
     try {
-      const response = await axios.post("http://localhost:5000/api/mentor/login", {
+      const response = await axios.post(`${LOGIN_API_FALLBACK}/api/mentor/login`, {
         email,
         password
       })

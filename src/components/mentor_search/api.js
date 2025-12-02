@@ -1,5 +1,7 @@
 // frontend/src/components/mentor_search/api.js
-export const BASE_URL = "http://localhost:5001";
+import { MENTOR_API_FALLBACK } from "@/api/endpoints";
+
+export const BASE_URL = MENTOR_API_FALLBACK;
 
 console.log("[MENTOR_API] BASE_URL =", BASE_URL);
 

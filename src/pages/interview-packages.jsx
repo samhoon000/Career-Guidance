@@ -1,4 +1,4 @@
-import { BarChart, BrainCircuit, Cloud, Cpu } from "lucide-react";
+import { BarChart, BrainCircuit, Cloud, Cpu, ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { PastelCard } from "@/components/shared/pastel-card";
 import { IconBubble } from "@/components/shared/icon-bubble";
@@ -42,6 +42,17 @@ export default function InterviewPackages() {
     <section className="relative min-h-screen py-20 md:py-24">
       <div className="absolute inset-0 bg-gradient-hero opacity-60" aria-hidden="true" />
       <div className="container relative mx-auto max-w-6xl px-6">
+        {/* Back to Home button */}
+        <div className="mb-6 md:mb-8 flex justify-start">
+          <button
+            onClick={() => (window.location.href = "/index.html")}
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-blue-500 px-5 py-2.5 text-sm font-semibold tracking-wide text-white shadow-md shadow-indigo-500/20 transition hover:shadow-lg hover:brightness-110"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </button>
+        </div>
+
         {/* Top heading & subtitle */}
         <div className="flex flex-col items-center text-center gap-4">
           <SectionHeading

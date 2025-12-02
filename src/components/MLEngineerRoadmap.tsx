@@ -8,7 +8,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Lock, Play } from "lucide-react";
+import { Lock, Play, CheckCircle2 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 import { mlEngineerModules, projects } from "@/data/mlEngineerContent";
 import { Progress as ProgressType } from "@/hooks/useMLEngineerProgress";
 import { VideoLesson } from "./VideoLesson";
@@ -78,65 +79,105 @@ export const MLEngineerRoadmap = ({
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <Accordion type="single" collapsible className="space-y-4">
-        {mlEngineerModules.map((module) => {
+    <div className="container px-4 py-8 mx-auto max-w-5xl">
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold mb-2">ML Engineer Learning Roadmap</h1>
+        <p className="text-muted-foreground">
+          Complete modules with videos, quizzes, and practical projects to master ML engineering.
+        </p>
+      </div>
+
+      <Accordion type="single" collapsible className="space-y-4" defaultValue="item-0">
+        {mlEngineerModules.map((module, idx) => {
           const unlocked = isModuleUnlocked(module.order);
           const allVideosWatched = module.videos.every((video) =>
             progress.videosWatched.includes(video.id)
           );
           const quizResult = progress.quizzesCompleted[module.quiz.id];
+          const videosWatchedCount = module.videos.filter((v) =>
+            progress.videosWatched.includes(v.id)
+          ).length;
 
           return (
-            <AccordionItem key={module.id} value={module.id} disabled={!unlocked}>
-              <Card className={!unlocked ? "opacity-60" : ""}>
-                <AccordionTrigger className="px-6 hover:no-underline">
-                  <div className="flex items-start gap-4 text-left w-full">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold">{module.title}</h3>
-                        {!unlocked && <Lock className="w-4 h-4 text-muted-foreground" />}
-                        {quizResult?.passed && (
-                          <Badge variant="default" className="bg-success">
-                            Completed
-                          </Badge>
-                        )}
+            <Card
+              key={module.id}
+              className={`overflow-hidden ${!unlocked ? "opacity-60" : ""}`}
+            >
+              <AccordionItem value={`item-${idx}`} className="border-none">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center w-full text-left">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold text-lg">{module.title}</h3>
                       </div>
+
                       <p className="text-sm text-muted-foreground mb-2">
                         {module.description}
                       </p>
-                      <Badge variant="outline">{module.duration}</Badge>
+
+                      <div className="flex items-center gap-3">
+                        <Progress value={(videosWatchedCount / module.videos.length) * 100} className="h-2 flex-1" />
+                        <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
+                          {Math.round((videosWatchedCount / module.videos.length) * 100)}%
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent>
-                  <div className="px-6 pb-4 space-y-4">
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-sm text-muted-foreground uppercase">
-                        Video Lessons
-                      </h4>
-                      {module.videos.map((video) => (
-                        <VideoLesson
-                          key={video.id}
-                          video={video}
-                          isWatched={progress.videosWatched.includes(video.id)}
-                          onMarkComplete={onMarkVideoComplete}
-                          onMarkIncomplete={onMarkVideoIncomplete}
-                        />
-                      ))}
+                <AccordionContent className="px-6 pb-6">
+                  {!unlocked ? (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <Lock className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                      <p className="font-medium">Module Locked</p>
+                      <p className="text-sm mt-1">
+                        Complete the previous module to unlock
+                      </p>
                     </div>
+                  ) : (
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <span>Video Lessons</span>
+                          <Badge variant="secondary">
+                            {videosWatchedCount}/{module.videos.length}
+                          </Badge>
+                        </h4>
+                        <div className="space-y-3">
+                          {module.videos.map((video) => (
+                            <VideoLesson
+                              key={video.id}
+                              video={video}
+                              isWatched={progress.videosWatched.includes(video.id)}
+                              onMarkComplete={onMarkVideoComplete}
+                              onMarkIncomplete={onMarkVideoIncomplete}
+                            />
+                          ))}
+                        </div>
+                      </div>
 
-                    <div className="pt-4 border-t">
-                      <Quiz
-                        quiz={module.quiz}
-                        onComplete={(score, passed) => onQuizComplete(module.quiz.id, score, passed)}
-                        previousResult={quizResult}
-                      />
+                      {module.quiz && (
+                        <div>
+                          <h4 className="font-semibold mb-3">Module Quiz</h4>
+                          {!allVideosWatched ? (
+                            <Card className="p-4 bg-muted/50">
+                              <p className="text-sm text-muted-foreground text-center">
+                                Complete all videos to unlock the quiz
+                              </p>
+                            </Card>
+                          ) : (
+                            <Quiz
+                              quiz={module.quiz}
+                              onComplete={(score, passed) => onQuizComplete(module.quiz.id, score, passed)}
+                              previousResult={quizResult}
+                            />
+                          )}
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  )}
                 </AccordionContent>
-              </Card>
-            </AccordionItem>
+              </AccordionItem>
+            </Card>
           );
         })}
         {/* FINAL PROJECTS SECTION */}

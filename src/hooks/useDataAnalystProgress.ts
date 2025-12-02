@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { LOGIN_API_FALLBACK } from "@/api/endpoints";
 
-const API_BASE = "http://localhost:5000/api/progress"; // change if needed
+const API_BASE = `${LOGIN_API_FALLBACK}/api/progress`;
 const TRACK_ID = "data_analyst";
 
 export interface UserProgress {
