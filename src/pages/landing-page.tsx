@@ -40,7 +40,7 @@ const LandingPage = () => {
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
               <span className="text-[#0A3A67]">Welcome to </span>
               <span className="bg-gradient-to-r from-primary via-primary to-orange-300 bg-clip-text text-transparent">
-                SkillQuest
+                EduVista
               </span>
             </h1>
             <p className="text-lg md:text-2xl text-muted-foreground">Your Personalized Career Learning Journey</p>

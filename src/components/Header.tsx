@@ -16,7 +16,7 @@ const Header = () => {
             <Zap className="h-5 w-5 text-white" />
           </div>
           <span className="text-2xl font-semibold tracking-tight text-slate-900">
-            [app_name]
+            EduVista
           </span>
         </div>
 

@@ -67,7 +67,7 @@ const SignupPage = () => {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
             <Zap className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-semibold text-foreground tracking-tight">[app_name]</span>
+          <span className="text-xl font-semibold text-foreground tracking-tight">EduVista</span>
         </div>
       </header>
 
