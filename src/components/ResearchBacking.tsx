@@ -9,35 +9,31 @@ const ResearchBacking = () => {
     {
       icon: Target,
       title: "Level-Based Learning",
-      stat: "87% increase",
       description: "Career development learning with structured progression increases perceived employability",
       source: "NIH Career Development Studies",
     },
     {
       icon: TrendingUp,
       title: "Gamification Impact",
-      stat: "2.5x engagement",
       description: "Meta-analyses show significant positive effects on motivation, achievement, and competence",
       source: "Frontiers in Psychology",
     },
     {
       icon: Users,
       title: "AI Mentorship",
-      stat: "68% faster learning",
       description: "AI mentors provide instant feedback, personalized guidance, and scalable support for all learners",
       source: "Educational Technology Research",
     },
     {
       icon: BookOpen,
       title: "Project-Based Learning",
-      stat: "94% confidence boost",
       description: "Building portfolio projects develops problem-solving skills and prepares for career transitions",
       source: "Science Direct PBL Studies",
     },
   ];
 
   return (
-    <section className="py-24">
+    <section className="py-8">
       <div className="container mx-auto max-w-6xl px-4">
         <SectionHeading
           eyebrow="Evidence-Based Approach"

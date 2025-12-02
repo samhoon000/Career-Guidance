@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
+import { API } from "@/api/authApi";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -33,7 +34,7 @@ const SignupPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch(`${API}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formValues),
@@ -66,7 +67,7 @@ const SignupPage = () => {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
             <Zap className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-semibold text-foreground tracking-tight">[app_name]</span>
+          <span className="text-xl font-semibold text-foreground tracking-tight">EduVista</span>
         </div>
       </header>
 

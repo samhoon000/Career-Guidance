@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
+import { API } from "@/api/authApi";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -20,7 +21,7 @@ const LoginPage = () => {
 
     try {
       // ----- CALL BACKEND LOGIN API -----
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -61,6 +62,17 @@ const LoginPage = () => {
           <span className="text-xl font-semibold text-foreground tracking-tight">[app_name]</span>
         </div>
       </header>
+
+      {/* Back button */}
+      <div className="mt-6 ml-10">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm hover:shadow-md transition"
+        >
+          <span>←</span>
+          <span>Back</span>
+        </button>
+      </div>
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md bg-card rounded-3xl shadow-2xl border border-border/60 p-8 space-y-6">
