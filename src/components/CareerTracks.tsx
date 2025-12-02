@@ -74,7 +74,7 @@ const CareerTracks = () => {
   };
 
   return (
-    <section className="relative py-24" id="tracks">
+    <section className="relative py-6" id="tracks">
       <div className="container mx-auto max-w-7xl px-4">
         <SectionHeading
           title="Career Tracks"

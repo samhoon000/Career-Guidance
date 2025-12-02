@@ -1,6 +1,12 @@
 import { Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
+
+
+
+
+
+
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/60 bg-white/80 backdrop-blur-xl shadow-sm">
@@ -13,6 +19,13 @@ const Header = () => {
             [app_name]
           </span>
         </div>
+
+
+
+
+
+
+
 
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-white/70 bg-white/70 px-6 py-2 text-sm font-medium text-slate-600 shadow-sm backdrop-blur md:flex">
           <a href="#tracks" className="rounded-full px-3 py-1 transition-colors hover:text-slate-900">
@@ -35,6 +48,16 @@ const Header = () => {
           
         </nav>
       </div>
+
+
+      
+
+
+
+
+
+
+      
     </header>
   );
 };

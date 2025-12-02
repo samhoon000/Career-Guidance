@@ -20,7 +20,7 @@ const Footer = () => {
     <footer
       id="about-us-section"  
     className="border-t border-white/60 bg-white/80 backdrop-blur-lg">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-12">
         <div className="grid gap-10 md:grid-cols-[2fr,1fr,1fr,1fr]">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
