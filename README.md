@@ -784,12 +784,11 @@ If you find a bug or have a feature request, please open an issue on GitHub with
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Groq](https://groq.com/) for providing fast LLM inference
 - [Render](https://render.com/) for hosting infrastructure
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) for database hosting
-- All open-source contributors whose libraries made this project possible
 
 ## 📞 Support
 
